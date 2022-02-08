@@ -7,7 +7,7 @@ NOTE: This will not get you to PCI Compliance. There are other things you must d
 
 
 The following configuration has been commented out:
-# PCI 2.2.4 Configure system security parameters to prevent misuse - Audit: Shut Down system immediately if unable to log security alerts
+- PCI 2.2.4 Configure system security parameters to prevent misuse - Audit: Shut Down system immediately if unable to log security alerts
 
 This is not something I wanted to implement in my environment.
 
