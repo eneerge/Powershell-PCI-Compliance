@@ -60,7 +60,7 @@ $pci222_servicesToDisable = @(
   ,"WZCSVC"
 )
 foreach ($s in $pci222_servicesToDisable) {
-  Set-Service -Name Fax -StartupType Disabled -ErrorAction SilentlyContinue
+  Set-Service -Name $s -StartupType Disabled -ErrorAction SilentlyContinue
 }
 
 # PCI 2.2.4 Configure system security parameters to prevent misuse - These settings are to be configured using the Local Security Policy using the "secedit" tool
