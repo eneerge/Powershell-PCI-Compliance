@@ -1,6 +1,7 @@
-﻿# Configure these to your preferred values
+# Configure these to your preferred values
 $adminUsername = "au"
 $guestUsername = "gu"
+$auditTrailMaxSize = (1024*50) # the maximum size of each Event Log before a new file is created (in KB)
 
 # PCI 1.4 Installing personal firewall software on any mobile and employee-owned computers with direct connectivity to the Internet - Firewall"
 Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile -Name EnableFirewall -Value 1
@@ -143,9 +144,25 @@ Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Ser
 Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\System -Name RestrictGuestAccess -Value 1 # System Log Restrict Guest Access: Enabled
 
 # PCI 10.7 Retain audit trail history for at least one year
-Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application -Name Retention -Value 365 # Retain application log
-Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security -Name Retention -Value 365 # Retain security log
-Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\System -Name Retention -Value 365 # Retain system log
+# This setting is no longer valid in newer versions of Windows. As a result, Tenable will report failures for these configurations. This is an issue with the audit file.
+# - https://social.technet.microsoft.com/Forums/windowsserver/en-US/82911638-b4fd-4477-af88-0204ffefe6df/event-log-retention-by-number-of-days-no-longer-supported-on-vista-2008-or-7
+# - https://docs.microsoft.com/en-us/answers/questions/422649/event-log-retention-days-instead-of-size.html
+#Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application -Name Retention -Value 365 # Retain application log
+#Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security -Name Retention -Value 365 # Retain security log
+#Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\System -Name Retention -Value 365 # Retain system log
+
+# Use max file size instead of days of retention
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application -Name MaxSize -Value $auditTrailMaxSize
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security -Name MaxSize -Value $auditTrailMaxSize
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System -Name MaxSize -Value $auditTrailMaxSize
+
+# Set up logs to roll over to a new file when it reaches max size
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application -Name AutoBackupLogFiles -Type String -Value "1"
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security -Name AutoBackupLogFiles -Type String -Value "1"
+Set-ItemProperty -Path Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System -Name AutoBackupLogFiles -Type String -Value "1"
+
+# In addition, one should also look into sending logs to a logging server. EG: Manage Engine EventLog Analyzer, Microsoft Sentinel, OSSEC, Splunk, Wazuh, etc.
+
 
 # Get all local security policy variables
 $lsp_eventAudit = Get-Variable | where {$_.Name -like "*lsp_eventAudit*" -and $_.Value -notlike "*System.Management*" }
