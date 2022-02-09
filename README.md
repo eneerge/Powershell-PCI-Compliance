@@ -80,7 +80,8 @@ PCI 2.2.4 Configure system security parameters to prevent misuse - Audit: Shut D
 PCI 10.7 Retain audit trail history for at least one year - Retain application log  
 PCI 10.7 Retain audit trail history for at least one year - Retain security log  
 PCI 10.7 Retain audit trail history for at least one year - Retain system log  
-  - These checks are looking for a value that is no longer valid in newer versions of Windows (Retain application log for x days). The replacement is to use a maximum file size with log rolling. I have implemented this in the script instead. In addition, you're better off sending the logs to a logging server, anyway. (See Manage Engine EventLog Analyzer, Microsoft Sentinel, OSSEC, Splunk, Wazuh, etc.)
+  - These checks are looking for a value that is no longer valid in newer versions of Windows (Retain application log for x days). The replacement is to use a maximum file size with log rolling. I have implemented this in the script instead.  
+  - In addition, to meet PCI 10.5.2 and 10.5.4 (which is not tested in the Tenable audit), you should use an external logging server (See Manage Engine EventLog Analyzer, Microsoft Sentinel, OSSEC, Splunk, Wazuh, etc.)
 
 # WARNINGS
 PCI 10.4 Synchronize all critical system clocks and times - Maximum tolerance for computer clock synchronization  
