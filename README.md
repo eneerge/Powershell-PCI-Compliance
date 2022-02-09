@@ -85,4 +85,4 @@ PCI 10.7 Retain audit trail history for at least one year - Retain system log
 
 # WARNINGS
 PCI 10.4 Synchronize all critical system clocks and times - Maximum tolerance for computer clock synchronization  
-  - This configuration is only valid on a domain controller. PCI Terminals should not be installed on domain controllers. I'm not sure why this setting is in the audit file.
+  - This configuration is only valid on a domain controller or possibly a domain controller environment. PCI Terminals should not be installed on domain controllers.
