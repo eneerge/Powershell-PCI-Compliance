@@ -6,9 +6,9 @@ NOTE: This will not get you to PCI Compliance. There are other things you must d
 
 Link to the spec: https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-2-1.pdf?agreement=true&time=1644989199290
 
-The following items are implemented that is not audited by Tenable:
-- details coming soon
-
+----
+  
+  
 After running the Tenable PCI compliance audit, the following should be the result:  
 # PASSES
 PCI 2.2.2 Disable all unnecessary and insecure services and protocols, Service Alerter Disabled  
