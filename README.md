@@ -4,7 +4,7 @@ This script implements settings checked by the Tenable Windows PCI Compliance 3.
 
 NOTE: This will not get you to PCI Compliance. There are other things you must do to satisfy the requirements of PCI such as segmenting your PCI terminals into a different network. However, this script can be used to help implement the policy settings in the Tenable audit file. 
 
-Link to the spec: https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-2-1.pdf?agreement=true&time=1644989199290
+Link to the spec: https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-2-1.pdf
 
 ----
   
