@@ -1,4 +1,4 @@
-## Update: Looks like they removed their PCI Compliance audit file. This is likely because they have a PCI ASV module now. May update this to pass the checks shown there.
+## Update: Having trouble finding this in the Compliance Module in Tenable, but the audit template is in the Tenable Audit portal: https://www.tenable.com/audits/PCI_3.0_Windows
 
 # Powershell-PCI-Compliance
 This Powershell script can be used to configure the Local Security Policy on a Windows computer to meet PCI Compliance.  
