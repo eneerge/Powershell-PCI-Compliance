@@ -1,3 +1,5 @@
+## Update: Looks like they removed their PCI Compliance audit file. This is likely because they have a PCI ASV module now. May update this to pass the checks shown there.
+
 # Powershell-PCI-Compliance
 This Powershell script can be used to configure the Local Security Policy on a Windows computer to meet PCI Compliance.  
 This script implements settings checked by the Tenable Windows PCI Compliance 3.0 audit file (https://www.tenable.com/downloads/audit).
